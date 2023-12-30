@@ -76,7 +76,7 @@ def list_accounts():
     # log the number of accounts being returned in the list
     app.logger.info("Returning [%s] accounts", len(account_list))
     # return the list with a return code of status.HTTP_200_OK
-    return jsonify(account_list),status.HTTP_200_OK
+    return jsonify(account_list), status.HTTP_200_OK
 
 ######################################################################
 # READ AN ACCOUNT
@@ -94,7 +94,7 @@ def get_accounts(account_id):
     account = Account.find(account_id)
     # abort() with a status.HTTP_404_NOT_FOUND if it cannot be found
     if not account:
-            abort(status.HTTP_404_NOT_FOUND, f"Account with id [{account_id}] could not be found.")
+        abort(status.HTTP_404_NOT_FOUND, f"Account with id [{account_id}] could not be found.")
     # return the serialize() version of the account with a return code of status.HTTP_200_OK
     return account.serialize(), status.HTTP_200_OK
 
@@ -113,7 +113,7 @@ def update_accounts(account_id):
     # use the Account.find() method to retrieve the account by the account_id
     account = Account.find(account_id)
     # abort() with a status.HTTP_404_NOT_FOUND if it cannot be found
-    if not account : 
+    if not account:
         abort(status.HTTP_404_NOT_FOUND, f"Account with id [{account_id}] could not be found.")
     # call the deserialize() method on the account passing in request.get_json()
     account.deserialize(request.get_json())
@@ -137,7 +137,7 @@ def delete_accounts(account_id):
     # use the Account.find() method to retrieve the account by the account_id
     account = Account.find(account_id)
     # if found, call the delete() method on the account
-    if account : 
+    if account:
         account.delete()
     # return and empty body ("") with a return code of status.HTTP_204_NO_CONTENT
     return "", status.HTTP_204_NO_CONTENT
